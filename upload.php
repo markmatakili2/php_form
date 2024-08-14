@@ -1,9 +1,9 @@
 <?php
 // Database connection
 $servername = "localhost";
-$username = "your_username";
-$password = "your_password";
-$dbname = "your_database_name";
+$username = "root";
+$password = "";
+$dbname = "image_upload";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -59,7 +59,7 @@ if ($uploadOk == 0) {
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         // Insert file data into the database
-        $sql = "INSERT INTO uploads (filename, filepath) VALUES ('" . basename($_FILES["fileToUpload"]["name"]) . "', '$target_file')";
+        $sql = "INSERT INTO images (id, file_path, image_path, time) VALUES ('" . basename($_FILES["fileToUpload"]["name"]) . "', '$target_file')";
 
         if ($conn->query($sql) === TRUE) {
             echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded and saved to the database.";
